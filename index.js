@@ -1,12 +1,25 @@
-exports.handler = (event, context, callback) => {
-    // TODO implement
-  //  callback(null, 'Hello from Lambda');
-  
-        let min = 0;
-        let max = 10;
-        
-        let result = Math.floor(Math.random() * (max - min));
- //       Math.random()*(max - min)) + min
-        callback(null, result);
-        
-};
+
+console.log('starting function');
+
+const AWS = require('aws-sdk');
+const docClient = new AWS.DynamoDB.DocumentClient({region: 'us-east-1'});
+
+
+exports.handler = function(e, ctx, callback){
+
+      var scanningParameters ={
+        TableName: 'guestbook',
+        Limit: 200
+      };
+
+      docClient.scan(scanningParameters, function(err,data){
+        if(err){
+          callback(err,null);
+
+        }else{
+          callback(null, data);
+        }
+
+      });
+
+    }
