@@ -1,11 +1,11 @@
 Transform: 'AWS::Serverless-2016-10-31'
 Parameters:
-    SamMultipler:
+    min:
         Description: "SAM multiplier. Make this really big to have a party :)"
-        Type: "String"
-    OriginUrl:
+        Type: "Number"
+    max:
         Description: "The origin url to allow CORS requests from. This will be the base URL of your static SAM website."
-        Type: "String"
+        Type: "Number"
 Resources:
     calculator:
         Type: AWS::Serverless::Function
